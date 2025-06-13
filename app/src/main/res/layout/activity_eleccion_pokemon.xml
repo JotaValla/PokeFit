@@ -5,6 +5,163 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/encuesta_background"
     tools:context=".EleccionPokemon">
+
+    <!-- Título con el tipo de entrenamiento -->
+
+    <!-- Botón Regresar -->
+
+    <!-- Título "Somos PokeFit" -->
+
+    <!-- Pokeball imagen -->
+
+    <TextView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Regresar"
+        android:textColor="@color/text_white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/jersey"
+        android:text="Somos\nPokeFit"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Texto "Elige tu Pokémon" -->
+
+    <!-- Primera fila de Pokémon -->
+
+    <ImageView
+        android:id="@+id/iv_pokeball"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/pokeball"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_choose_pokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Elige tu Pokémon"
+        android:textColor="@color/text_white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_pokeball" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_pokemon1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_choose_pokemon" />
+
+    <TextView
+        android:id="@+id/tv_pokemon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Pokémon 1"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/gif_pokemon1"
+        app:layout_constraintStart_toStartOf="@+id/gif_pokemon1"
+        app:layout_constraintTop_toBottomOf="@+id/gif_pokemon1" />
+
+    <!-- Segunda fila de Pokémon -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_pokemon2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pokemon1" />
+
+    <TextView
+        android:id="@+id/tv_pokemon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Pokémon 2"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/gif_pokemon2"
+        app:layout_constraintStart_toStartOf="@+id/gif_pokemon2"
+        app:layout_constraintTop_toBottomOf="@+id/gif_pokemon2" />
+
+    <!-- Tercera fila de Pokémon -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_pokemon3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pokemon2" />
+
+    <TextView
+        android:id="@+id/tv_pokemon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Pokémon 3"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/gif_pokemon3"
+        app:layout_constraintStart_toStartOf="@+id/gif_pokemon3"
+        app:layout_constraintTop_toBottomOf="@+id/gif_pokemon3" />
+
+    <!-- Texto recordatorio -->
+    <TextView
+        android:id="@+id/tv_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/poppins_thin"
+        android:gravity="center"
+        android:text="Recuerda que una vez elegido tu pokémon no podrás cambiarlo"
+        android:textColor="@color/text_white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pokemon3"
+        app:layout_constraintVertical_bias="0.583" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

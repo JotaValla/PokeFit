@@ -6,42 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/encuesta_background"
-    tools:context=".SeleccionObjetivo">
-
-    <!-- Título "Encuesta Entrenamiento" -->
-    <TextView
-        android:id="@+id/tv_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_thin"
-        android:text="Encuesta Entrenamiento"
-        android:textColor="@color/text_white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Botón Regresar -->
-    <TextView
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Regresar"
-        android:textColor="@color/text_white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header" />
+    tools:context=".Encuesta">
 
     <!-- Título "Somos PokeFit" -->
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="137dp"
         android:fontFamily="@font/jersey"
         android:text="Somos\nPokeFit"
         android:textAlignment="center"
@@ -65,35 +36,33 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <!-- Texto pregunta -->
-
-    <!-- Botón "Mejorar mi entrenamiento" -->
     <TextView
         android:id="@+id/tv_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_medium"
         android:text="¿Cuál es tu objetivo?"
         android:textColor="@color/text_white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_pokeball" />
 
-    <!-- Botón "Velocidad" -->
+    <!-- Botón "Salir de sedentarismo" -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/btn_speed"
+        android:id="@+id/btn_sedentary"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="28dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="514dp">
+        app:layout_constraintTop_toBottomOf="@+id/tv_question">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -103,17 +72,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Velocidad"
+                android:text="Salir de sedentarismo"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_arrow_speed"
+                app:layout_constraintEnd_toStartOf="@+id/iv_arrow_sedentary"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_arrow_speed"
+                android:id="@+id/iv_arrow_sedentary"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="16dp"
@@ -125,20 +94,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Botón "Fuerza" -->
+    <!-- Botón "Mejorar mi entrenamiento" -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/btn_strength"
+        android:id="@+id/btn_improve"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="40dp"
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="28dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_speed">
+        app:layout_constraintTop_toBottomOf="@+id/btn_sedentary">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -148,62 +117,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Fuerza"
+                android:text="Mejorar mi entrenamiento"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_arrow_strength"
+                app:layout_constraintEnd_toStartOf="@+id/iv_arrow_improve"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_arrow_strength"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_arrow_forward"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/button_teal" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Botón "Resistencia" -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btn_endurance"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="28dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_strength">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Resistencia"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_arrow_endurance"
-                app:layout_constraintHorizontal_bias="0.4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_arrow_endurance"
+                android:id="@+id/iv_arrow_improve"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="16dp"
