@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".WelcomeActivity">
+
+    <!-- Título PokeFit -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PokeFit"
+        android:textSize="64sp"
+        android:textColor="@color/text_white"
+        android:fontFamily="@font/jersey"
+        android:textStyle="bold"
+        android:layout_marginTop="120dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Imagen Pokeball -->
+    <ImageView
+        android:id="@+id/iv_pokeball"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/pokeball"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Texto descriptivo -->
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins_medium"
+        android:lineSpacingExtra="4dp"
+        android:text="¿Listo para ponerte en forma mientras entrenas como un verdadero Maestro Pokémon?"
+        android:textAlignment="center"
+        android:textColor="@color/text_white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_pokeball" />
+
+    <!-- Botón de continuar -->
+    <FrameLayout
+        android:id="@+id/btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_rounded_selector"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="80dp"
+        android:elevation="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Flecha dentro del botón -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow_forward"
+            android:tint="@color/button_teal" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
