@@ -5,6 +5,522 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".EntrenamientoFuerza">
+
+    <!-- ScrollView para hacer la pantalla desplazable -->
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="20dp">
+
+            <!-- Header Section con Timer y Pikachu -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp">
+
+                <!-- Timer Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <!-- Pikachu Running GIF -->
+                    <ImageView
+                        android:id="@+id/iv_pikachu_running"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/pikachu_running"
+                        android:scaleType="fitCenter"
+                        android:visibility="gone" />
+
+                    <!-- Timer Display -->
+                    <TextView
+                        android:id="@+id/tv_timer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="00:00"
+                        android:textSize="48sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/jersey"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <!-- Status Icon -->
+                    <TextView
+                        android:id="@+id/tv_status_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏸️"
+                        android:textSize="32sp" />
+
+                </LinearLayout>
+
+                <!-- Training Question -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="¿Qué deseas entrenar ahora?"
+                    android:textSize="20sp"
+                    android:textColor="#E8E3FF"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold" />
+
+                <!-- Dropdown Spinner -->
+                <Spinner
+                    android:id="@+id/spinner_exercise_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/spinner_background"
+                    android:layout_marginBottom="20dp"
+                    android:padding="16dp" />
+
+                <!-- Start Training Button -->
+                <Button
+                    android:id="@+id/btn_start_training"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Iniciar Entrenamiento"
+                    android:textColor="@color/text_white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@drawable/button_rounded_rect"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Exercise Table Section -->
+            <LinearLayout
+                android:id="@+id/ll_exercise_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="20dp"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone">
+
+                <!-- Table Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ejercicio Seleccionado"
+                        android:textSize="18sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="bold" />
+
+                    <!-- Add Set Button -->
+                    <Button
+                        android:id="@+id/btn_add_set"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="+"
+                        android:textSize="20sp"
+                        android:textColor="@color/text_white"
+                        android:background="@drawable/button_rounded_rect"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Table Headers -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/value_container_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Prev"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Serie"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="KG"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Reps"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hecho"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Container for Dynamic Rows -->
+                <LinearLayout
+                    android:id="@+id/ll_table_rows"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Row 1 - Completed -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/table_row_background"
+                        android:padding="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:alpha="0.7">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="8 x 12kg"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="12"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="6"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="✓"
+                            android:textColor="@color/exp_green"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <!-- Row 2 - Completed -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/table_row_background"
+                        android:padding="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:alpha="0.7">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="8 x 12kg"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="12"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="6"
+                            android:textColor="@color/text_white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="✓"
+                            android:textColor="@color/exp_green"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <!-- Row 3 - Current/Active -->
+                    <LinearLayout
+                        android:id="@+id/ll_current_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/value_container_background"
+                        android:padding="12dp"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="8 x 12kg"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="12"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="6"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_current_status"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="No"
+                            android:textColor="#FF6B6B"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="?attr/selectableItemBackground" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Finish Training Button -->
+            <Button
+                android:id="@+id/btn_finish_training"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Finalizar Entrenamiento"
+                android:textColor="@color/text_white"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/button_rounded_rect"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Barra de navegación inferior -->
+    <LinearLayout
+        android:id="@+id/ll_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bottom_nav_bg"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Home -->
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_home"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Stats -->
+        <LinearLayout
+            android:id="@+id/nav_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_stats"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Train (Active) -->
+        <LinearLayout
+            android:id="@+id/nav_train"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_train_fuerza"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Profile -->
+        <LinearLayout
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_perfil"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

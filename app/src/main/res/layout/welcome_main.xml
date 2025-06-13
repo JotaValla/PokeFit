@@ -74,7 +74,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_arrow_forward"
-            android:tint="@color/button_teal" />
+            app:tint="@color/button_teal" />
 
     </FrameLayout>
 

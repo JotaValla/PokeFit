@@ -5,6 +5,529 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".StatsFuerza">
+
+    <!-- ScrollView para hacer la pantalla desplazable -->
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="20dp">
+
+            <!-- Header Section con Machamp -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp">
+
+                <!-- Machamp GIF Container -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <ImageView
+                        android:id="@+id/iv_machamp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/machamp_gif"
+                        android:scaleType="fitCenter" />
+
+                    <!-- Pokemon Name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Machamp"
+                        android:textSize="24sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/jersey"
+                        android:textStyle="bold"
+                        android:layout_marginTop="12dp" />
+
+                </LinearLayout>
+
+                <!-- Level Progress Container -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Level Circle -->
+                    <TextView
+                        android:id="@+id/tv_level"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="200"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/circle_level_indicator"
+                        android:layout_marginEnd="16dp" />
+
+                    <!-- Progress Bar -->
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_weight="1"
+                        android:progress="75"
+                        android:max="100"
+                        android:progressDrawable="@drawable/progress_bar_custom"
+                        android:layout_marginEnd="16dp" />
+
+                    <!-- Max Level -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500"
+                        android:textSize="14sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Stake Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp">
+
+                <!-- Stake Title with Fire Icon -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stake 🔥"
+                        android:textSize="24sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/jersey"
+                        android:textStyle="bold" />
+
+                    <!-- Current Streak -->
+                    <TextView
+                        android:id="@+id/tv_current_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5 días"
+                        android:textSize="16sp"
+                        android:textColor="#FF6B6B"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Weekly Progress Circles -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <!-- Monday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_monday"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stake_circle_active"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lun"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+30 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Tuesday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_tuesday"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stake_circle_active"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mar"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+25 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Wednesday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_wednesday"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/stake_circle_super_active"
+                            android:layout_marginBottom="6dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mié"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+50 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Thursday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_thursday"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stake_circle_inactive"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jue"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+0 exp"
+                            android:textSize="10sp"
+                            android:textColor="#FF6B6B"
+                            android:fontFamily="@font/poppins_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Friday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_friday"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/stake_circle_super_active"
+                            android:layout_marginBottom="6dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vie"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+45 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Saturday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_saturday"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stake_circle_active"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sáb"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+35 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Sunday -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/circle_sunday"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stake_circle_active"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dom"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+40 exp"
+                            android:textSize="10sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/poppins_medium" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Weekly Summary -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/value_container_background"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total EXP esta semana"
+                        android:textSize="16sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_weekly_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="225 exp"
+                        android:textSize="18sp"
+                        android:textColor="#4CAF50"
+                        android:fontFamily="@font/jersey"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Barra de navegación inferior -->
+    <LinearLayout
+        android:id="@+id/ll_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bottom_nav_bg"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Home -->
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_home"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Stats (Active) -->
+        <LinearLayout
+            android:id="@+id/nav_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_stats"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Train -->
+        <LinearLayout
+            android:id="@+id/nav_train"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_train_fuerza"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Profile -->
+        <LinearLayout
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_perfil"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

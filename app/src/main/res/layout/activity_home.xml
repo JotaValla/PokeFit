@@ -5,6 +5,548 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".Home">
+
+    <!-- ScrollView para hacer la pantalla desplazable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="20dp"
+            android:gravity="center_horizontal">
+
+            <!-- Contenedor principal del Pokémon -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_pokemon_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                app:cardBackgroundColor="@color/container_dark"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="28dp">
+
+                    <!-- GIF del Pokémon -->
+                    <ImageView
+                        android:id="@+id/iv_pokemon_gif"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
+                        android:src="@drawable/machamp_gif"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Nombre del Pokémon -->
+                    <TextView
+                        android:id="@+id/tv_pokemon_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Garchomp"
+                        android:textSize="32sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/jersey"
+                        android:layout_marginTop="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/iv_pokemon_gif"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Contenedor de la barra de progreso mejorado -->
+                    <LinearLayout
+                        android:id="@+id/ll_progress_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pokemon_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <!-- Etiqueta de nivel -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nivel de experiencia"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/text_white"
+                            android:textSize="14sp"
+                            android:alpha="0.8"
+                            android:layout_marginBottom="12dp"
+                            android:layout_gravity="start" />
+
+                        <!-- Contenedor de la barra de progreso -->
+                        <FrameLayout
+                            android:id="@+id/fl_progress_main_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- Barra de progreso de fondo -->
+                            <View
+                                android:id="@+id/progress_background_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:background="@drawable/progress_background"
+                                android:layout_marginStart="22dp"
+                                android:layout_marginEnd="22dp" />
+
+                            <!-- Barra de progreso rellena -->
+                            <View
+                                android:id="@+id/progress_fill"
+                                android:layout_width="140dp"
+                                android:layout_height="44dp"
+                                android:background="@drawable/progress_fill"
+                                android:layout_marginStart="22dp" />
+
+                            <!-- Círculo del nivel superpuesto -->
+                            <TextView
+                                android:id="@+id/tv_current_level"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="0dp"
+                                android:background="@drawable/circle_level_indicator"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/text_white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <!-- Contenedor de textos de progreso -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginStart="22dp"
+                                android:layout_marginEnd="22dp">
+
+                                <!-- Espaciador para el círculo -->
+                                <View
+                                    android:layout_width="60dp"
+                                    android:layout_height="match_parent" />
+
+                                <!-- Texto del progreso actual -->
+                                <TextView
+                                    android:id="@+id/tv_progress_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="200"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:background="@drawable/value_container_background"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="4dp"
+                                    android:layout_marginStart="16dp" />
+
+                                <!-- Espaciador flexible -->
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
+
+                                <!-- Separador visual -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="/"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:textColor="#80FFFFFF"
+                                    android:textSize="16sp"
+                                    android:layout_marginEnd="8dp" />
+
+                                <!-- Texto del máximo -->
+                                <TextView
+                                    android:id="@+id/tv_max_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="600"
+                                    android:textColor="#80FFFFFF"
+                                    android:textSize="14sp"
+                                    android:background="@drawable/value_container_background"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="4dp"
+                                    android:alpha="0.7"
+                                    android:layout_marginEnd="16dp" />
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Sección Stake mejorada -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="24dp"
+                android:layout_marginBottom="20dp">
+
+                <!-- Título de la sección -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_stake_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stake Semanal"
+                        android:textSize="24sp"
+                        android:textColor="#E8E3FF"
+                        android:fontFamily="@font/jersey"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="28sp" />
+
+                </LinearLayout>
+
+                <!-- Subtitle descriptivo -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completa tus entrenamientos diarios para ganar recompensas"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/text_white"
+                    android:textSize="14sp"
+                    android:alpha="0.8"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Contenedor de las pokeballs mejorado -->
+                <LinearLayout
+                    android:id="@+id/ll_pokeballs_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:baselineAligned="false">
+
+                    <!-- Pokeball 1 con días - Mejorada -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/value_container_background"
+                        android:padding="12dp"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/master_ball"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Lun"
+                            android:textColor="#E8E3FF"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="+10 exp"
+                            android:textColor="@color/exp_green"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Pokeball 2 con días - Mejorada -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/value_container_background"
+                        android:padding="12dp"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/master_ball"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Mie"
+                            android:textColor="#E8E3FF"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="+12 exp"
+                            android:textColor="@color/exp_green"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Pokeball 3 (gris) - Mejorada -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/circle_black"
+                        android:padding="12dp"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/master_ball"
+                            android:alpha="0.3"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Espaciador invisible para mantener alineación -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="12sp"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <!-- Pokeball 4 (gris) - Mejorada -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/circle_black"
+                        android:padding="12dp"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/master_ball"
+                            android:alpha="0.3"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Espaciador invisible para mantener alineación -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="12sp"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <!-- Pokeball 5 (gris) - Mejorada -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/circle_black"
+                        android:padding="12dp"
+                        android:layout_margin="4dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/master_ball"
+                            android:alpha="0.3"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Espaciador invisible para mantener alineación -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text=" "
+                            android:textSize="12sp"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Barra de navegación inferior -->
+    <LinearLayout
+        android:id="@+id/ll_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bottom_nav_bg"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Home -->
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_home"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Stats -->
+        <LinearLayout
+            android:id="@+id/nav_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_stats"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Train -->
+        <LinearLayout
+            android:id="@+id/nav_train"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_train_fuerza"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Profile -->
+        <LinearLayout
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_perfil"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

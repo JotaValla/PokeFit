@@ -2,9 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gradient_start">#3A3A4A</color>
-    <color name="gradient_end">#5A4B7A</color>
+    <color name="gradient_start">#212531</color>
+    <color name="gradient_end">#9747FF</color>
     <color name="purple_accent">#7B68EE</color>
     <color name="text_white">#FFFFFF</color>
     <color name="button_teal">#00BCD4</color>
+    
+    <!-- Nuevos colores para Home -->
+    <color name="progress_gradient_start">#4B3A70</color>
+    <color name="progress_gradient_end">#9747FF</color>
+    <color name="exp_green">#0FA78D</color>
+    <color name="container_dark">#322F42</color>
+    <color name="bottom_nav_bg">#211E28</color>
 </resources>
