@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212531"
+    android:background="@drawable/gradient_background"
     tools:context=".StatsActivity">
+
 
     <!-- Texto "Stats" -->
 
@@ -22,7 +23,8 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="77dp">
+        tools:layout_editor_absoluteY="77dp"
+        tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -207,7 +209,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:src="@drawable/poke_ball" />
+                    android:src="@drawable/master_ball" />
 
                 <!-- Master Ball para Martes -->
                 <ImageView
@@ -215,7 +217,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:src="@drawable/poke_ball" />
+                    android:src="@drawable/master_ball" />
 
                 <!-- Master Ball para Miércoles -->
                 <ImageView
@@ -231,7 +233,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:src="@drawable/poke_ball" />
+                    android:src="@drawable/master_ball" />
 
                 <!-- Master Ball para Viernes -->
                 <ImageView
@@ -247,7 +249,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:src="@drawable/poke_ball" />
+                    android:src="@drawable/master_ball" />
 
                 <!-- Master Ball para Domingo -->
                 <ImageView
@@ -255,7 +257,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:src="@drawable/poke_ball" />
+                    android:src="@drawable/master_ball" />
 
             </LinearLayout>
 
@@ -534,68 +536,102 @@
     </androidx.cardview.widget.CardView>
 
     <!-- Barra de navegación inferior -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/navbar"
+    <LinearLayout
+        android:id="@+id/ll_bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#322F42"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bottom_nav_bg"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:paddingBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Iconos de navegación -->
-        <ImageView
+        <!-- Home -->
+        <LinearLayout
             android:id="@+id/nav_home"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:src="@drawable/ic_home"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nav_stats"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_white" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_home"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Stats (Active) -->
+        <LinearLayout
             android:id="@+id/nav_stats"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:src="@drawable/ic_stats"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nav_training"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/nav_home"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#9F7EF7" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
-            android:id="@+id/nav_training"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_stats"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Train -->
+        <LinearLayout
+            android:id="@+id/nav_train"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:src="@drawable/ic_training"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nav_profile"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/nav_stats"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_white" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_train_fuerza"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+        <!-- Profile -->
+        <LinearLayout
             android:id="@+id/nav_profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:src="@drawable/ic_profile"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/nav_training"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_white" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_perfil"
+                android:alpha="0.5"
+                app:tint="@color/text_white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

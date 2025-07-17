@@ -1,7 +1,9 @@
 package com.jimmy.valladares.pokefit
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -29,6 +31,7 @@ class StatsActivity : AppCompatActivity() {
 
         // Configurar navegación
         setupNavigation()
+        updateNavigationState()
     }
 
     private fun configureGoalAchievement() {
@@ -45,28 +48,57 @@ class StatsActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // Configurar los botones de navegación
-        val navHome = findViewById<ImageView>(R.id.nav_home)
-        val navStats = findViewById<ImageView>(R.id.nav_stats)
-        val navTraining = findViewById<ImageView>(R.id.nav_training)
-        val navProfile = findViewById<ImageView>(R.id.nav_profile)
+        // Configurar los botones de navegación usando LinearLayout (que contienen los ImageView)
+        val navHome = findViewById<LinearLayout>(R.id.nav_home)
+        val navStats = findViewById<LinearLayout>(R.id.nav_stats)
+        val navTrain = findViewById<LinearLayout>(R.id.nav_train) // Corregido: nav_train, no nav_training
+        val navProfile = findViewById<LinearLayout>(R.id.nav_profile)
 
-        // Aquí pondrías los click listeners para cada ícono de navegación
+        // Click listeners para cada sección de navegación
         navHome.setOnClickListener {
-            // Navegar a Home
-            // startActivity(Intent(this, Home::class.java))
+            navigateToActivity(Home::class.java)
         }
 
-        // Stats ya está seleccionado
+        // Stats ya está seleccionado (no necesita listener si estamos en StatsActivity)
+        navStats.setOnClickListener {
+            // Ya estamos en Stats, no hacer nada o mostrar mensaje
+        }
 
-        navTraining.setOnClickListener {
-            // Navegar a Training
-            // startActivity(Intent(this, Training::class.java))
+        navTrain.setOnClickListener {
+            navigateToActivity(EntrenamientoFuerza::class.java)
         }
 
         navProfile.setOnClickListener {
-            // Navegar a Profile
-            // startActivity(Intent(this, Perfil::class.java))
+            navigateToActivity(Perfil::class.java)
         }
+    }
+
+
+    private fun navigateToActivity(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
+        // No usar finish() aquí para mantener el stack de navegación
+        overridePendingTransition(0, 0) // Transición suave sin animación
+    }
+
+
+    private fun updateNavigationState() {
+        // Obtener las referencias a los LinearLayout
+        val navHome = findViewById<LinearLayout>(R.id.nav_home)
+        val navStats = findViewById<LinearLayout>(R.id.nav_stats)
+        val navTrain = findViewById<LinearLayout>(R.id.nav_train)
+        val navProfile = findViewById<LinearLayout>(R.id.nav_profile)
+
+        // Obtener los ImageView dentro de cada LinearLayout (primer hijo)
+        val homeIcon = navHome.getChildAt(0) as? ImageView
+        val statsIcon = navStats.getChildAt(0) as? ImageView
+        val trainIcon = navTrain.getChildAt(0) as? ImageView
+        val profileIcon = navProfile.getChildAt(0) as? ImageView
+
+        // Resetear alpha de todos los íconos
+        homeIcon?.alpha = 0.5f
+        statsIcon?.alpha = 1.0f // Stats está activo
+        trainIcon?.alpha = 0.5f
+        profileIcon?.alpha = 0.5f
     }
 }

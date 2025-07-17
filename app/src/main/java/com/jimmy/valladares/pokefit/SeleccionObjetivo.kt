@@ -26,13 +26,7 @@ class SeleccionObjetivo : AppCompatActivity() {
             finish() // Cierra esta actividad y regresa a la anterior
         }
 
-        // Configurar botón "Mejorar mi entrenamiento"
-        val btnTraining = findViewById<CardView>(R.id.btn_training)
-        btnTraining.setOnClickListener {
-            val intent = Intent(this, EleccionPokemon::class.java)
-            intent.putExtra("TIPO_ENTRENAMIENTO", "PASOS") // Default a PASOS
-            startActivity(intent)
-        }
+
 
         // Configurar botón "Velocidad"
         val btnSpeed = findViewById<CardView>(R.id.btn_speed)
