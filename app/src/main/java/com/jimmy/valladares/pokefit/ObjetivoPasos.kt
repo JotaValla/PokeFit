@@ -56,13 +56,24 @@ class ObjetivoPasos : AppCompatActivity() {
         // Configurar botón continuar
         val btnContinue = findViewById<CardView>(R.id.btn_continue)
         btnContinue.setOnClickListener {
-            // Guardar la meta de pasos (aquí usaríamos SharedPreferences en una implementación real)
+            // Guardar la meta de pasos
             val stepGoal = currentSteps
             
-            // Navegar a la siguiente pantalla, por ejemplo EleccionPokemon
+            // Navegar a EleccionPokemon con tipo PASOS
             val intent = Intent(this, EleccionPokemon::class.java)
             intent.putExtra("OBJETIVO_PASOS", stepGoal)
+            intent.putExtra("TIPO_ENTRENAMIENTO", "PASOS")
             startActivity(intent)
+        }
+        
+        // Obtener el objetivo del intent para personalizar la experiencia
+        val objetivo = intent.getStringExtra("OBJETIVO")
+        
+        // Personalizar el mensaje según el objetivo
+        if (objetivo == "SEDENTARISMO") {
+            // Puedes personalizar el título o descripción si es necesario
+            val tvTitle = findViewById<TextView>(R.id.tv_title)
+            tvTitle?.text = "¡Empecemos a movernos!"
         }
     }
 }

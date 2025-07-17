@@ -23,10 +23,8 @@ class SeleccionObjetivo : AppCompatActivity() {
         // Configurar botón de regresar
         val btnBack = findViewById<TextView>(R.id.btn_back)
         btnBack.setOnClickListener {
-            finish() // Cierra esta actividad y regresa a la anterior
+            finish()
         }
-
-
 
         // Configurar botón "Velocidad"
         val btnSpeed = findViewById<CardView>(R.id.btn_speed)

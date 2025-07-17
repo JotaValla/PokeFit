@@ -24,25 +24,19 @@ class Encuesta : AppCompatActivity() {
         // Configurar botón "Salir de sedentarismo"
         val btnSedentary = findViewById<CardView>(R.id.btn_sedentary)
         btnSedentary.setOnClickListener {
-            // Aquí puedes navegar a la siguiente actividad según esta selección
-            // Por ejemplo: 
-            // val intent = Intent(this, ObjetivoPasos::class.java)
-            // intent.putExtra("OBJETIVO", "SEDENTARISMO")
-            // startActivity(intent)
-
-            Toast.makeText(this, "Objetivo: Salir del sedentarismo", Toast.LENGTH_SHORT).show()
+            // Navegar directamente a la actividad de objetivo de pasos
+            val intent = Intent(this, ObjetivoPasos::class.java)
+            intent.putExtra("OBJETIVO", "SEDENTARISMO")
+            startActivity(intent)
         }
 
         // Configurar botón "Mejorar mi entrenamiento"
         val btnImprove = findViewById<CardView>(R.id.btn_improve)
         btnImprove.setOnClickListener {
-            // Aquí puedes navegar a la siguiente actividad según esta selección
-            // Por ejemplo:
-            // val intent = Intent(this, EntrenamientoFuerza::class.java)
-            // intent.putExtra("OBJETIVO", "ENTRENAMIENTO")
-            // startActivity(intent)
-
-            Toast.makeText(this, "Objetivo: Mejorar mi entrenamiento", Toast.LENGTH_SHORT).show()
+            // Navegar a la selección de objetivos específicos
+            val intent = Intent(this, SeleccionObjetivo::class.java)
+            intent.putExtra("OBJETIVO", "ENTRENAMIENTO")
+            startActivity(intent)
         }
     }
 }
