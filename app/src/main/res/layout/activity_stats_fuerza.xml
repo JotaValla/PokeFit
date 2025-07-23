@@ -26,7 +26,6 @@
             android:paddingTop="60dp"
             android:paddingBottom="20dp">
 
-            <!-- Header Section con Machamp -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,49 +62,354 @@
 
                 </LinearLayout>
 
-                <!-- Level Progress Container -->
+                <FrameLayout
+                    android:id="@+id/fl_progress_main_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Barra de progreso de fondo -->
+                    <View
+                        android:id="@+id/progress_background_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/progress_background"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginEnd="22dp" />
+
+                    <!-- Barra de progreso rellena (DINÁMICA) -->
+                    <View
+                        android:id="@+id/progress_fill"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/progress_fill"
+                        android:layout_marginStart="22dp" />
+
+                    <!-- Círculo del nivel superpuesto -->
+                    <TextView
+                        android:id="@+id/tv_current_level"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="0dp"
+                        android:background="@drawable/circle_level_indicator"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/text_white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:elevation="4dp" />
+
+                    <!-- Contenedor de textos de progreso -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginEnd="22dp">
+
+                        <!-- Espaciador para el círculo -->
+                        <View
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent" />
+
+                        <!-- Texto del progreso actual -->
+                        <TextView
+                            android:id="@+id/tv_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="200"
+                            android:textColor="@color/text_white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:layout_marginStart="16dp" />
+
+                        <!-- Espaciador flexible -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <!-- Separador visual -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="/"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Texto del máximo -->
+                        <TextView
+                            android:id="@+id/tv_max_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="600"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="14sp"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:alpha="0.7"
+                            android:layout_marginEnd="16dp" />
+
+                    </LinearLayout>
+
+                    <!-- Indicador de porcentaje flotante (NUEVO) -->
+                    <TextView
+                        android:id="@+id/tv_progress_percentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="33%"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/text_white"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="140dp"
+                        android:elevation="6dp"
+                        android:visibility="visible" />
+
+                    <!-- Texto de EXP ganada (animación) -->
+                    <TextView
+                        android:id="@+id/tv_exp_gained"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+30 EXP"
+                        android:fontFamily="@font/jersey"
+                        android:textColor="#4CAF50"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:elevation="8dp"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <!-- Contenedor adicional para mostrar info de EXP debajo -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp">
 
-                    <!-- Level Circle -->
+                    <!-- EXP necesaria para siguiente nivel -->
                     <TextView
-                        android:id="@+id/tv_level"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:text="200"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_white"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:background="@drawable/circle_level_indicator"
-                        android:layout_marginEnd="16dp" />
-
-                    <!-- Progress Bar -->
-                    <ProgressBar
-                        android:id="@+id/progress_bar"
-                        style="?android:attr/progressBarStyleHorizontal"
+                        android:id="@+id/tv_exp_needed"
                         android:layout_width="0dp"
-                        android:layout_height="16dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:progress="75"
-                        android:max="100"
-                        android:progressDrawable="@drawable/progress_bar_custom"
-                        android:layout_marginEnd="16dp" />
+                        android:text="400 EXP para nivel 2"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="11sp"
+                        android:gravity="start" />
 
-                    <!-- Max Level -->
-                    <TextView
+                    <!-- Bonus de racha -->
+                    <LinearLayout
+                        android:id="@+id/streak_bonus_container"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="500"
-                        android:textSize="14sp"
-                        android:textColor="#E8E3FF"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔥"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+50% EXP"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="#FF6B6B"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="4dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Estadísticas Generales -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/container_background"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp">
+
+                <!-- Título Estadísticas -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estadisticas"
+                    android:textSize="20sp"
+                    android:textColor="#E8E3FF"
+                    android:fontFamily="@font/jersey"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Grid de estadísticas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Promedio días por semana -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@drawable/value_container_background"
+                        android:padding="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_weekly_average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5.2"
+                            android:textSize="24sp"
+                            android:textColor="#4CAF50"
+                            android:fontFamily="@font/jersey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="días/semana"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <!-- Racha más larga -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@drawable/value_container_background"
+                        android:padding="16dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_longest_streak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="21"
+                            android:textSize="24sp"
+                            android:textColor="#FF6B6B"
+                            android:fontFamily="@font/jersey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="racha máxima"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Segunda fila de estadísticas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Tiempo promedio -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@drawable/value_container_background"
+                        android:padding="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_average_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="28"
+                            android:textSize="24sp"
+                            android:textColor="#2196F3"
+                            android:fontFamily="@font/jersey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="min promedio"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <!-- Total entrenamientos -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@drawable/value_container_background"
+                        android:padding="16dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_total_workouts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="89"
+                            android:textSize="24sp"
+                            android:textColor="#FF9800"
+                            android:fontFamily="@font/jersey"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="entrenamientos"
+                            android:textSize="12sp"
+                            android:textColor="#E8E3FF"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -132,8 +436,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Stake 🔥"
-                        android:textSize="24sp"
+                        android:text="🔥 Racha Actual"
+                        android:textSize="20sp"
                         android:textColor="#E8E3FF"
                         android:fontFamily="@font/jersey"
                         android:textStyle="bold" />
