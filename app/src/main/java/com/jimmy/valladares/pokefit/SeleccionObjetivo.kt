@@ -18,20 +18,10 @@ class SeleccionObjetivo : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-
-        // Configurar botón de regresar
+        }        // Configurar botón de regresar
         val btnBack = findViewById<TextView>(R.id.btn_back)
         btnBack.setOnClickListener {
             finish() // Cierra esta actividad y regresa a la anterior
-        }
-
-        // Configurar botón "Mejorar mi entrenamiento"
-        val btnTraining = findViewById<CardView>(R.id.btn_training)
-        btnTraining.setOnClickListener {
-            val intent = Intent(this, EleccionPokemon::class.java)
-            intent.putExtra("TIPO_ENTRENAMIENTO", "PASOS") // Default a PASOS
-            startActivity(intent)
         }
 
         // Configurar botón "Velocidad"

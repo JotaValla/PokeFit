@@ -52,15 +52,15 @@ class ObjetivoPasos : AppCompatActivity() {
                 // No se necesita implementación
             }
         })
-        
-        // Configurar botón continuar
+          // Configurar botón continuar
         val btnContinue = findViewById<CardView>(R.id.btn_continue)
         btnContinue.setOnClickListener {
             // Guardar la meta de pasos (aquí usaríamos SharedPreferences en una implementación real)
             val stepGoal = currentSteps
             
-            // Navegar a la siguiente pantalla, por ejemplo EleccionPokemon
+            // Navegar a EleccionPokemon con tipo PASOS para sedentarismo
             val intent = Intent(this, EleccionPokemon::class.java)
+            intent.putExtra("TIPO_ENTRENAMIENTO", "PASOS")
             intent.putExtra("OBJETIVO_PASOS", stepGoal)
             startActivity(intent)
         }

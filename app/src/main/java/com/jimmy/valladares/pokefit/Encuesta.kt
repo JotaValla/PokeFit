@@ -3,6 +3,7 @@ package com.jimmy.valladares.pokefit
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -14,35 +15,36 @@ class Encuesta : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_encuesta)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        
+        // Habilitar el botón de navegación hacia atrás en la barra de acción
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
         // Configurar botón "Salir de sedentarismo"
         val btnSedentary = findViewById<CardView>(R.id.btn_sedentary)
         btnSedentary.setOnClickListener {
-            // Aquí puedes navegar a la siguiente actividad según esta selección
-            // Por ejemplo: 
-            // val intent = Intent(this, ObjetivoPasos::class.java)
-            // intent.putExtra("OBJETIVO", "SEDENTARISMO")
-            // startActivity(intent)
-
-            Toast.makeText(this, "Objetivo: Salir del sedentarismo", Toast.LENGTH_SHORT).show()
+            // Navegar a la pantalla de Objetivo de Pasos
+            val intent = Intent(this, ObjetivoPasos::class.java)
+            intent.putExtra("OBJETIVO", "SEDENTARISMO")
+            startActivity(intent)
         }
 
         // Configurar botón "Mejorar mi entrenamiento"
         val btnImprove = findViewById<CardView>(R.id.btn_improve)
         btnImprove.setOnClickListener {
-            // Aquí puedes navegar a la siguiente actividad según esta selección
-            // Por ejemplo:
-            // val intent = Intent(this, EntrenamientoFuerza::class.java)
-            // intent.putExtra("OBJETIVO", "ENTRENAMIENTO")
-            // startActivity(intent)
-
-            Toast.makeText(this, "Objetivo: Mejorar mi entrenamiento", Toast.LENGTH_SHORT).show()
+            // Navegar a la pantalla de Selección de Objetivo
+            val intent = Intent(this, SeleccionObjetivo::class.java)
+            intent.putExtra("OBJETIVO", "ENTRENAMIENTO")
+            startActivity(intent)
         }
+    }
+    
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
