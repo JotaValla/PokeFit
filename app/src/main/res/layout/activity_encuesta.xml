@@ -11,25 +11,24 @@
     <!-- Título "Somos PokeFit" -->
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="290dp"
-        android:layout_height="137dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/jersey"
         android:text="Somos\nPokeFit"
         android:textAlignment="center"
         android:textColor="@color/text_white"
         android:textSize="64sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Pokeball imagen -->
     <ImageView
         android:id="@+id/iv_pokeball"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/pokeball"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,7 @@
         android:id="@+id/tv_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_medium"
         android:text="¿Cuál es tu objetivo?"
         android:textColor="@color/text_white"

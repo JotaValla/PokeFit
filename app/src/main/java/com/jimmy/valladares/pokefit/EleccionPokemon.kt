@@ -4,24 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
+import pl.droidsonroids.gif.GifImageView
 
 class EleccionPokemon : AppCompatActivity() {
-
-    private lateinit var gifPokemon1: ImageView
-    private lateinit var gifPokemon2: ImageView
-    private lateinit var gifPokemon3: ImageView
-
+    
+    private lateinit var gifPokemon1: GifImageView
+    private lateinit var gifPokemon2: GifImageView
+    private lateinit var gifPokemon3: GifImageView
+    
     private lateinit var tvPokemon1: TextView
     private lateinit var tvPokemon2: TextView
     private lateinit var tvPokemon3: TextView
     private lateinit var tvHeader: TextView
-
+    
+    // Lista actual de Pokémon mostrados
+    private var currentPokemonList = listOf<Pokemon>()
+    
     // Mapeo de tipos de entrenamiento a listas de Pokémon
     private val pokemonMap = mapOf(
         "PASOS" to listOf(
@@ -37,7 +39,7 @@ class EleccionPokemon : AppCompatActivity() {
         "FUERZA" to listOf(
             Pokemon("Machop", "machop"),
             Pokemon("Torchic", "torchic"),
-            Pokemon("Torchic", "torchic") // Parece repetido en la imagen, podrías cambiarlo por otro Pokémon
+            Pokemon("Geodude", "geodude")
         ),
         "RESISTENCIA" to listOf(
             Pokemon("Horsea", "horsea"),
@@ -45,108 +47,182 @@ class EleccionPokemon : AppCompatActivity() {
             Pokemon("Tepig", "tepig")
         )
     )
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_eleccion_pokemon)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // Inicializar vistas PRIMERO
+        
+        // IMPORTANTE: Primero inicializar todas las vistas
         initViews()
-
+        
         // Configurar botón de regresar
         val btnBack = findViewById<TextView>(R.id.btn_back)
         btnBack.setOnClickListener {
             finish()
         }
-
+        
         // Obtener el tipo de entrenamiento del intent
         val tipoEntrenamiento = intent.getStringExtra("TIPO_ENTRENAMIENTO") ?: "PASOS"
-
-        // Actualizar título según el tipo de entrenamiento
-        tvHeader.text = "Elige Pokemon ${tipoEntrenamiento.lowercase().replaceFirstChar { it.uppercase() }}"
-
+        
+        // Ahora sí actualizar el título (después de initViews)
+        updateHeaderTitle(tipoEntrenamiento)
+        
         // Cargar los Pokémon adecuados según el tipo
         loadPokemonByType(tipoEntrenamiento)
-
+        
         // Configurar click listeners para seleccionar Pokémon
         setupPokemonClickListeners()
     }
-
+    
     private fun initViews() {
+        // Inicializar todas las vistas con verificación de existencia
         gifPokemon1 = findViewById(R.id.gif_pokemon1)
         gifPokemon2 = findViewById(R.id.gif_pokemon2)
         gifPokemon3 = findViewById(R.id.gif_pokemon3)
-
+        
         tvPokemon1 = findViewById(R.id.tv_pokemon1)
         tvPokemon2 = findViewById(R.id.tv_pokemon2)
         tvPokemon3 = findViewById(R.id.tv_pokemon3)
-        tvHeader = findViewById(R.id.tv_header)
-    }    private fun loadPokemonByType(type: String) {
-        val pokemonList = pokemonMap[type] ?: pokemonMap["PASOS"]!! // Default a PASOS si no encuentra
-
-        // Cargar primer Pokémon
-        val resourceId1 = resources.getIdentifier(pokemonList[0].resourceName, "drawable", packageName)
-        if (resourceId1 != 0) {
-            Glide.with(this).asGif().load(resourceId1).into(gifPokemon1)
+        
+        // Verificar que tv_header existe en el layout
+        val headerView = findViewById<TextView>(R.id.tv_header)
+        if (headerView != null) {
+            tvHeader = headerView
         } else {
-            // Si no encuentra el GIF, usar drawable por defecto
-            Glide.with(this).load(R.drawable.pokeball).into(gifPokemon1)
+            // Si no existe, crear un comportamiento por defecto
+            Toast.makeText(this, "Error: tv_header no encontrado en el layout", Toast.LENGTH_LONG).show()
+            finish()
+            return
         }
-        tvPokemon1.text = pokemonList[0].name
-
-        // Cargar segundo Pokémon
-        val resourceId2 = resources.getIdentifier(pokemonList[1].resourceName, "drawable", packageName)
-        if (resourceId2 != 0) {
-            Glide.with(this).asGif().load(resourceId2).into(gifPokemon2)
-        } else {
-            Glide.with(this).load(R.drawable.pokeball).into(gifPokemon2)
-        }
-        tvPokemon2.text = pokemonList[1].name
-
-        // Cargar tercer Pokémon
-        val resourceId3 = resources.getIdentifier(pokemonList[2].resourceName, "drawable", packageName)
-        if (resourceId3 != 0) {
-            Glide.with(this).asGif().load(resourceId3).into(gifPokemon3)
-        } else {
-            Glide.with(this).load(R.drawable.pokeball).into(gifPokemon3)
-        }
-        tvPokemon3.text = pokemonList[2].name
     }
-
+    
+    private fun updateHeaderTitle(tipo: String) {
+        // Verificar que tvHeader esté inicializado
+        if (::tvHeader.isInitialized) {
+            val headerText = when (tipo) {
+                "PASOS" -> "Elige Pokemon Pasos"
+                "VELOCIDAD" -> "Elige Pokemon Velocidad"
+                "FUERZA" -> "Elige Pokemon Fuerza"
+                "RESISTENCIA" -> "Elige Pokemon Resistencia"
+                else -> "Elige Pokemon"
+            }
+            tvHeader.text = headerText
+        } else {
+            Toast.makeText(this, "Error: Header no inicializado", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun loadPokemonByType(type: String) {
+        currentPokemonList = pokemonMap[type] ?: pokemonMap["PASOS"]!!
+        
+        // Verificar que las vistas estén inicializadas antes de usarlas
+        if (::gifPokemon1.isInitialized && ::gifPokemon2.isInitialized && ::gifPokemon3.isInitialized) {
+            // Cargar primer Pokémon
+            loadPokemonImage(currentPokemonList[0], gifPokemon1, tvPokemon1)
+            
+            // Cargar segundo Pokémon
+            loadPokemonImage(currentPokemonList[1], gifPokemon2, tvPokemon2)
+            
+            // Cargar tercer Pokémon
+            loadPokemonImage(currentPokemonList[2], gifPokemon3, tvPokemon3)
+        } else {
+            Toast.makeText(this, "Error: Vistas no inicializadas", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun loadPokemonImage(pokemon: Pokemon, gifView: GifImageView, textView: TextView) {
+        // Intentar cargar la imagen del Pokémon
+        val resourceId = resources.getIdentifier(pokemon.resourceName, "drawable", packageName)
+        
+        if (resourceId != 0) {
+            gifView.setImageResource(resourceId)
+        } else {
+            // Si no se encuentra la imagen, usar una imagen por defecto
+            val defaultResource = resources.getIdentifier("pokeball", "drawable", packageName)
+            if (defaultResource != 0) {
+                gifView.setImageResource(defaultResource)
+            }
+            Toast.makeText(this, "Imagen no encontrada para ${pokemon.name}", Toast.LENGTH_SHORT).show()
+        }
+        
+        textView.text = pokemon.name
+    }
+    
     private fun setupPokemonClickListeners() {
-        // Click listener para el primer Pokémon
-        gifPokemon1.setOnClickListener {
-            selectPokemon(tvPokemon1.text.toString())
-        }
-
-        // Click listener para el segundo Pokémon
-        gifPokemon2.setOnClickListener {
-            selectPokemon(tvPokemon2.text.toString())
-        }
-
-        // Click listener para el tercer Pokémon
-        gifPokemon3.setOnClickListener {
-            selectPokemon(tvPokemon3.text.toString())
+        // Verificar que las vistas estén inicializadas
+        if (::gifPokemon1.isInitialized && ::gifPokemon2.isInitialized && ::gifPokemon3.isInitialized) {
+            // Click listener para el primer Pokémon
+            gifPokemon1.setOnClickListener {
+                if (currentPokemonList.isNotEmpty()) {
+                    selectPokemon(currentPokemonList[0])
+                }
+            }
+            
+            // Click listener para el segundo Pokémon
+            gifPokemon2.setOnClickListener {
+                if (currentPokemonList.size > 1) {
+                    selectPokemon(currentPokemonList[1])
+                }
+            }
+            
+            // Click listener para el tercer Pokémon
+            gifPokemon3.setOnClickListener {
+                if (currentPokemonList.size > 2) {
+                    selectPokemon(currentPokemonList[2])
+                }
+            }
         }
     }
-
-    private fun selectPokemon(pokemonName: String) {
-        // Guardar la selección del Pokémon y avanzar a la siguiente pantalla
-        Toast.makeText(this, "Has seleccionado a $pokemonName", Toast.LENGTH_SHORT).show()
-
-        // Aquí podrías guardar la selección en SharedPreferences
-        // y navegar a la siguiente pantalla
-        val intent = Intent(this, Home::class.java)
-        intent.putExtra("POKEMON_SELECCIONADO", pokemonName)
-        startActivity(intent)
+    
+    private fun selectPokemon(pokemon: Pokemon) {
+        // Mostrar confirmación
+        Toast.makeText(this, "Has seleccionado a ${pokemon.name}", Toast.LENGTH_SHORT).show()
+        
+        // Obtener datos adicionales del intent
+        val tipoEntrenamiento = intent.getStringExtra("TIPO_ENTRENAMIENTO") ?: "PASOS"
+        val objetivoPasos = intent.getIntExtra("OBJETIVO_PASOS", 0)
+        
+        // Guardar la selección en SharedPreferences
+        saveSelectedPokemon(pokemon, tipoEntrenamiento, objetivoPasos)
+        
+        // Navegar a la siguiente pantalla
+        try {
+            val intent = Intent(this, Home::class.java)
+            intent.putExtra("POKEMON_SELECCIONADO", pokemon.name)
+            intent.putExtra("POKEMON_RESOURCE", pokemon.resourceName)
+            intent.putExtra("TIPO_ENTRENAMIENTO", tipoEntrenamiento)
+            intent.putExtra("OBJETIVO_PASOS", objetivoPasos)
+            startActivity(intent)
+            
+            // Opcional: cerrar todas las actividades anteriores
+            finishAffinity()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al navegar a Home: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
-
+    
+    // Método para guardar la selección
+    private fun saveSelectedPokemon(pokemon: Pokemon, tipoEntrenamiento: String, objetivoPasos: Int) {
+        try {
+            val sharedPref = getSharedPreferences("PokeFitPrefs", MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("selected_pokemon_name", pokemon.name)
+                putString("selected_pokemon_resource", pokemon.resourceName)
+                putString("training_type", tipoEntrenamiento)
+                putInt("steps_goal", objetivoPasos)
+                apply()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al guardar selección: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
     // Clase auxiliar para representar a un Pokémon
     data class Pokemon(val name: String, val resourceName: String)
 }

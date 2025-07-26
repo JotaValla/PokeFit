@@ -6,39 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".EleccionPokemon">    <!-- Título con el tipo de entrenamiento -->
-    <TextView
-        android:id="@+id/tv_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_thin"
-        android:text="Elige Pokemon"
-        android:textColor="@color/text_white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".EleccionPokemon">
+
+    <!-- Título con el tipo de entrenamiento -->
 
     <!-- Botón Regresar -->
+
+    <!-- Título "Somos PokeFit" -->
+
+    <!-- Pokeball imagen -->
+
     <TextView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
         android:clickable="true"
         android:fontFamily="@font/poppins_medium"
         android:text="Regresar"
         android:textColor="@color/text_white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header" />    <!-- Título "Somos PokeFit" -->
+        tools:layout_editor_absoluteY="16dp" />
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/jersey"
         android:text="Somos\nPokeFit"
         android:textAlignment="center"
@@ -46,7 +41,7 @@
         android:textSize="64sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Texto "Elige tu Pokémon" -->
 
@@ -75,7 +70,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_pokeball" />    <ImageView
+        app:layout_constraintTop_toBottomOf="@+id/iv_pokeball" />
+
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_pokemon1"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -98,7 +95,8 @@
         app:layout_constraintStart_toStartOf="@+id/gif_pokemon1"
         app:layout_constraintTop_toBottomOf="@+id/gif_pokemon1" />
 
-    <!-- Segunda fila de Pokémon -->    <ImageView
+    <!-- Segunda fila de Pokémon -->
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_pokemon2"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -121,7 +119,8 @@
         app:layout_constraintStart_toStartOf="@+id/gif_pokemon2"
         app:layout_constraintTop_toBottomOf="@+id/gif_pokemon2" />
 
-    <!-- Tercera fila de Pokémon -->    <ImageView
+    <!-- Tercera fila de Pokémon -->
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_pokemon3"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -164,5 +163,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_pokemon3"
         app:layout_constraintVertical_bias="0.583" />
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="Elige Pokemon"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

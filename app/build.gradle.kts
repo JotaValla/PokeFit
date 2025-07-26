@@ -42,8 +42,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     
-    // Glide para cargar GIFs
-    implementation(libs.glide)
+    // Glide para cargar imágenes
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    
+    // Biblioteca para GIFs
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

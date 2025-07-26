@@ -23,7 +23,7 @@ class WelcomeActivity : AppCompatActivity() {
         // Configurar el botón de continuar
         val btnContinue = findViewById<FrameLayout>(R.id.btn_continue)
         btnContinue.setOnClickListener {
-            // Navegar a la pantalla de Encuesta
+            // Navegar a la pantalla Home
             startActivity(Intent(this, Encuesta::class.java))
             finish() // Cerrar la actividad de Welcome
         }
