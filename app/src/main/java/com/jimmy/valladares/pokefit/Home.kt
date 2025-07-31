@@ -71,6 +71,7 @@ class Home : AppCompatActivity() {
 
         initializeViews()
         setupNavigation()
+        loadSelectedPokemon() // ✅ Agregar esta línea
         updatePokemonData()
     }
 
@@ -117,19 +118,76 @@ class Home : AppCompatActivity() {
         }
 
         navStats.setOnClickListener {
-            startActivity(Intent(this, StatsFuerza::class.java))
-            finish()
+            navigateToStats() // ✅ Navegación inteligente
         }
 
         navTrain.setOnClickListener {
-            startActivity(Intent(this, EntrenamientoFuerza::class.java))
-            finish()
+            navigateToTraining() // ✅ Navegación inteligente
         }
 
         navProfile.setOnClickListener {
             startActivity(Intent(this, Perfil::class.java))
-            finish()
         }
+    }
+
+    private fun navigateToStats() {
+        // Obtener el tipo de entrenamiento
+        val sharedPref = getSharedPreferences("PokeFitPrefs", MODE_PRIVATE)
+        val trainingType = sharedPref.getString("training_type", "PASOS")
+        
+        val intent = when (trainingType) {
+            "FUERZA" -> Intent(this, StatsFuerza::class.java)
+            "VELOCIDAD" -> {
+                try {
+                    Intent(this, StatsFuerza::class.java)
+                } catch (e: Exception) {
+                    Intent(this, StatsActivity::class.java) // Fallback
+                }
+            }
+            "RESISTENCIA" -> {
+                try {
+                    Intent(this, StatsFuerza::class.java)
+                } catch (e: Exception) {
+                    Intent(this, StatsActivity::class.java) // Fallback
+                }
+            }
+            else -> Intent(this, StatsActivity::class.java) // Para PASOS
+        }
+        
+        startActivity(intent)
+    }
+
+    private fun navigateToTraining() {
+        // Obtener el tipo de entrenamiento
+        val sharedPref = getSharedPreferences("PokeFitPrefs", MODE_PRIVATE)
+        val trainingType = sharedPref.getString("training_type", "PASOS")
+        
+        val intent = when (trainingType) {
+            "FUERZA" -> {
+                try {
+                    Intent(this, EntrenamientoFuerza::class.java)
+                } catch (e: Exception) {
+                    Intent(this, EntrenamientoFuerza::class.java) // Fallback
+                }
+            }
+            "VELOCIDAD" -> {
+                try {
+                    Intent(this, EntrenamientoFuerza::class.java)
+                } catch (e: Exception) {
+                    Intent(this, EntrenamientoFuerza::class.java)
+                }
+            }
+            "RESISTENCIA" -> {
+                try {
+                    Intent(this, EntrenamientoFuerza::class.java)
+                } catch (e: Exception) {
+                     Intent(this, EntrenamientoFuerza::class.java)
+                }
+            }
+            else -> Intent(this, EntrenamientoFuerza::class.java) //pasos
+        }
+        
+        startActivity(intent)
     }
 
     private fun updatePokemonData() {
@@ -303,6 +361,42 @@ class Home : AppCompatActivity() {
     private fun onExerciseCompleted() {
         // Ejemplo: dar 30 EXP por completar un ejercicio
         addExperience(30)
+    }
+
+    private fun loadSelectedPokemon() {
+        // Obtener el Pokémon seleccionado del intent o SharedPreferences
+        val selectedPokemon = intent.getStringExtra("POKEMON_SELECCIONADO")
+        val pokemonResource = intent.getStringExtra("POKEMON_RESOURCE")
+        
+        if (selectedPokemon == null || pokemonResource == null) {
+            // Cargar desde SharedPreferences
+            val sharedPref = getSharedPreferences("PokeFitPrefs", MODE_PRIVATE)
+            val savedPokemon = sharedPref.getString("selected_pokemon_name", "Treecko")
+            val savedResource = sharedPref.getString("selected_pokemon_resource", "treecko")
+            
+            pokemonNameText.text = savedPokemon
+            loadPokemonGif(savedResource ?: "treecko")
+        } else {
+            pokemonNameText.text = selectedPokemon
+            loadPokemonGif(pokemonResource)
+        }
+    }
+
+    private fun loadPokemonGif(resourceName: String) {
+        val resourceId = resources.getIdentifier(resourceName, "drawable", packageName)
+        
+        if (resourceId != 0) {
+            Glide.with(this)
+                .asGif()
+                .load(resourceId)
+                .into(pokemonGif)
+        } else {
+            // Imagen por defecto
+            Glide.with(this)
+                .asGif()
+                .load(R.drawable.treecko)
+                .into(pokemonGif)
+        }
     }
 
     override fun onResume() {

@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">PokeFit</string>
-    <string name = "estadisticas">Estadísticas Generales</string>>
+    <string name="estadisticas">Estadísticas Generales</string>
+    <!-- Login strings -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="text_remember_me">Recordar datos</string>
+    <string name="text_start_game">Iniciar Sesión</string>
+    <string name="text_new_user">Crear Cuenta</string>
+
+    <!-- Error messages -->
+    <string name="error_email_required">El email es requerido</string>
+    <string name="error_password_required">La contraseña es requerida</string>
+    <string name="error_password_min_length">La contraseña debe tener al menos 6 caracteres</string>
+
 </resources>
